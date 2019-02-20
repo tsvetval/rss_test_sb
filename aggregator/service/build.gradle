@@ -3,7 +3,9 @@ apply plugin: 'java-library'
 ext.moduleName = 'rss.example.aggregator.service'
 
 dependencies {
-	implementation(
-		'org.apache.commons:commons-lang3:3.7'
-	)
+    implementation(
+            project(':aggregator-adapter'),
+            project(':search-adapter'),
+            'org.apache.commons:commons-lang3:3.7'
+    )
 }
