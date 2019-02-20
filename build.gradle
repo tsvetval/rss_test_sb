@@ -9,7 +9,9 @@ subprojects {
 
 	repositories {
 		jcenter()
+		mavenCentral()
 	}
+	
 	afterEvaluate {
 		repositories {
 			jcenter()

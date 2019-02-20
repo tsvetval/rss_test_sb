@@ -3,9 +3,13 @@ apply plugin: 'java-library'
 ext.moduleName = 'rss.example.aggregator.service'
 
 dependencies {
+    repositories{
+        mavenCentral()
+    }
     implementation(
             project(':aggregator-adapter'),
             project(':search-adapter'),
-            'org.apache.commons:commons-lang3:3.7'
+            'org.apache.commons:commons-lang3:3.7',
+            'com.rometools:rome:1.5.0'
     )
 }
