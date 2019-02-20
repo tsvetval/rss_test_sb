@@ -1,0 +1,11 @@
+apply plugin: 'java-library'
+
+ext.moduleName = 'rss.example.rest'
+
+dependencies {
+	implementation(
+		'org.springframework:spring-web:5.0.5.RELEASE',
+		'com.fasterxml.jackson.core:jackson-core:2.9.5',
+		'com.fasterxml.jackson.core:jackson-annotations:2.9.0',
+	)
+}
