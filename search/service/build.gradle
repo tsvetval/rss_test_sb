@@ -4,7 +4,7 @@ ext.moduleName = 'rss.example.aggregator.service'
 
 dependencies {
     implementation(
-            project(':search-adapter'),
+            project(':search-model'),
             'org.apache.commons:commons-lang3:3.7'
     )
 }

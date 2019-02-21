@@ -1,6 +1,6 @@
 apply plugin: 'java-library'
 
-ext.moduleName = 'rss.example.aggregator.adapter'
+ext.moduleName = 'rss.example.aggregator.model'
 
 dependencies {
 	implementation(

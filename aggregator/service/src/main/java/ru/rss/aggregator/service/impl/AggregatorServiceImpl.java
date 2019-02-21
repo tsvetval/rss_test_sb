@@ -7,8 +7,8 @@ import ru.rss.aggregator.entity.RssFeed;
 import ru.rss.aggregator.entity.RssFeedChannel;
 import ru.rss.aggregator.port.AggregatorService;
 import ru.rss.aggregator.port.RssChannelConfiguration;
-import ru.rss.aggregator.service.RssReader;
-import ru.rss.aggregator.service.RssRepository;
+import ru.rss.aggregator.service.rss.RssReader;
+import ru.rss.aggregator.service.storage.RssRepository;
 import ru.rss.search.port.SearchService;
 
 import java.io.IOException;

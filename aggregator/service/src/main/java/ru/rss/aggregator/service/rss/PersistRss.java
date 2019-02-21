@@ -1,4 +1,4 @@
-package ru.rss.aggregator.service.impl;
+package ru.rss.aggregator.service.rss;
 
 import ru.rss.aggregator.entity.RssFeed;
 

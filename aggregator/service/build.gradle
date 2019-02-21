@@ -7,8 +7,8 @@ dependencies {
         mavenCentral()
     }
     implementation(
-            project(':aggregator-adapter'),
-            project(':search-adapter'),
+            project(':aggregator-model'),
+            project(':search-model'),
             'org.apache.commons:commons-lang3:3.7',
             'com.rometools:rome:1.5.0'
     )

@@ -1,4 +1,4 @@
-package ru.rss.aggregator.service;
+package ru.rss.aggregator.service.rss;
 
 import com.rometools.rome.io.FeedException;
 import ru.rss.aggregator.entity.RssFeed;

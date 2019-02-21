@@ -1,20 +1,15 @@
-package ru.rss.aggregator.service.impl;
+package ru.rss.aggregator.service.rss;
 
-import com.rometools.rome.feed.synd.SyndEnclosure;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ru.rss.aggregator.entity.RssEnclosure;
 import ru.rss.aggregator.entity.RssFeed;
 import ru.rss.aggregator.entity.RssFeedChannel;
-import ru.rss.aggregator.service.RssReader;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.List;
