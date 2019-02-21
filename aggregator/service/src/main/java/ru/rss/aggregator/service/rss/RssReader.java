@@ -9,5 +9,5 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 public interface RssReader {
-    public List<RssFeed> readRss(RssFeedChannel channel) throws IOException, FeedException;
+    List<RssFeed> readRss(RssFeedChannel channel) throws IOException, FeedException;
 }

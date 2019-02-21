@@ -1,5 +1,3 @@
-apply plugin: 'java-library'
-
 ext.moduleName = 'rss.example.rest'
 
 dependencies {

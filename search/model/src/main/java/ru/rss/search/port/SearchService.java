@@ -6,8 +6,9 @@ import ru.rss.search.entity.SearchRssFeed;
 import java.util.List;
 
 public interface SearchService {
-    public void indexRss(SearchRssFeed searchRssFeed);
 
-    public SearchResult searchRss(String term);
+    void indexRss(SearchRssFeed searchRssFeed);
+
+    SearchResult searchRss(String term);
 
 }

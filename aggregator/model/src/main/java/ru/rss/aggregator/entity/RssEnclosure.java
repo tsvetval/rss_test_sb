@@ -1,8 +1,13 @@
 package ru.rss.aggregator.entity;
 
-public class RssEnclosure {
+import java.io.Serializable;
+
+public class RssEnclosure implements Serializable {
     private String contentType;
     private String url;
+
+    public RssEnclosure() {
+    }
 
     public RssEnclosure(String contentType, String url) {
         this.contentType = contentType;

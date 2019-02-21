@@ -1,15 +1,19 @@
 package ru.rss.aggregator.entity;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-public class RssFeed {
+public class RssFeed implements Serializable {
     private String title;
     private String description;
     private String url;
     private List<RssEnclosure> enclosures;
     private ZonedDateTime date;
     private String feedSource;
+
+    public RssFeed() {
+    }
 
     public RssFeed(String title, String description, String url, List<RssEnclosure> enclosures, ZonedDateTime date) {
         this.title = title;

@@ -5,16 +5,19 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
+import org.springframework.stereotype.Component;
 import ru.rss.aggregator.entity.RssEnclosure;
 import ru.rss.aggregator.entity.RssFeed;
 import ru.rss.aggregator.entity.RssFeedChannel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class RomeRssReaderImpl implements RssReader {
 
     @Override
@@ -30,6 +33,6 @@ public class RomeRssReaderImpl implements RssReader {
                 syndEntry.getDescription() == null ? "" : syndEntry.getDescription().getValue(),
                 syndEntry.getUri(),
                 syndEntry.getEnclosures().stream().map(enc -> new RssEnclosure(enc.getType(), enc.getUrl())).collect(Collectors.toList()),
-                ZonedDateTime.now());
+                ZonedDateTime.ofInstant(syndEntry.getPublishedDate().toInstant(), ZoneId.systemDefault()));
     }
 }
