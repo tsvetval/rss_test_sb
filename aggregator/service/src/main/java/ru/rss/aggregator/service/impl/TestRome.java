@@ -16,11 +16,9 @@ public class TestRome {
     private static Logger log = LoggerFactory.getLogger(AggregatorServiceImpl.class);
 
     public static void main(String[] args) throws IOException, FeedException {
-        boolean ok = false;
-
-            RssReader rssReader = new RomeRssReaderImpl();
-            rssReader.readRss(new RssFeedChannel("http://static.feed.rbc.ru/rbc/logical/footer/news.rss"))
-                    .forEach(rssFeed -> log.info("feed {}, {}, {}, {}, {}",rssFeed.getTitle(), rssFeed.getDescription(), rssFeed.getUrl(), rssFeed.getEnclosures()));
+        RssReader rssReader = new RomeRssReaderImpl();
+        rssReader.readRss(new RssFeedChannel("http://static.feed.rbc.ru/rbc/logical/footer/news.rss"))
+                .forEach(rssFeed -> log.info("feed {}, {}, {}, {}, {}", rssFeed.getTitle(), rssFeed.getDescription(), rssFeed.getUrl(), rssFeed.getEnclosures()));
 
     }
 }
