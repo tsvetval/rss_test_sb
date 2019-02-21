@@ -13,4 +13,7 @@ dependencies {
 
     compile 'org.postgresql:postgresql'
 
+    compile project(":aggregator-model")
+    compile project(":search-model")
+    compile 'com.rometools:rome:1.5.0'
 }
