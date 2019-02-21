@@ -3,9 +3,17 @@ apply plugin: 'java-library'
 ext.moduleName = 'rss.example.rest'
 
 dependencies {
-	implementation(
-		'org.springframework:spring-web:5.0.5.RELEASE',
-		'com.fasterxml.jackson.core:jackson-core:2.9.5',
-		'com.fasterxml.jackson.core:jackson-annotations:2.9.0',
-	)
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-logging'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-json'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc'
+	compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure'
+	compile group: 'org.springframework', name: 'spring-jdbc'
+	compile group: 'org.springframework', name: 'spring-webmvc'
+
+	compile project(":aggregator-service")
+	compile project(":aggregator-model")
+	compile project(":search-model")
+	compile project(":search-service")
 }

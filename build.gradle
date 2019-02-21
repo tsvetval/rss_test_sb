@@ -1,50 +1,54 @@
 buildscript {
-	repositories {
-		jcenter()
-		mavenCentral()
-	}
 
 	ext {
 		encoding = 'UTF-8'
+		javaVersion = 1.8
+
 		springBootVersion = "2.0.5.RELEASE"
-		elasticsearchVersion = "6.5.0" // client
+		elasticsearchVersion = "6.5.0"
 	}
+	repositories {
+		mavenCentral()
+	}
+
 	dependencies {
 		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
 	}
 }
+subprojects {
+	apply plugin: 'java'
 
-//apply plugin: "io.spring.dependency-management"
+	apply plugin: "io.spring.dependency-management"
 
-allprojects {
 	group = 'ru.rss.example'
 	version = '1.0.0'
 
-	apply plugin: 'java'
-
 	sourceCompatibility = 1.8
 	targetCompatibility = 1.8
-
-	tasks.withType(JavaCompile) {
-		options.encoding = "$encoding"
-	}
-
-	apply plugin: 'idea'
 
 	repositories {
 		jcenter()
 		mavenCentral()
 	}
-	
 
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+		}
+
+		dependencies {
+			dependency "org.elasticsearch:elasticsearch:${elasticsearchVersion}"
+			dependency "org.elasticsearch.client:transport:${elasticsearchVersion}"
+			dependency "org.elasticsearch.client:elasticsearch-rest-high-level-client:${elasticsearchVersion}"
+		}
+	}
+    
 	dependencies {
 		testCompile 'org.testng:testng:6.11'
 		testCompile 'org.assertj:assertj-core:3.6.2'
 	}
+    test {
+        useTestNG()
+    }
 
-
-	test {
-		useTestNG()
-	}
 }
-
