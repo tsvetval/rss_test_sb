@@ -13,8 +13,8 @@ public class RssItem {
     @GeneratedValue
     private Long id;
     @Column
-    @Type(type = "RssFeedType")
-    private RssFeed rssFeed;
+    @Type(type = "RssFeedModelType")
+    private RssFeedModel rssFeedModel;
 
     public Long getId() {
         return id;
@@ -24,11 +24,11 @@ public class RssItem {
         this.id = id;
     }
 
-    public RssFeed getRssFeed() {
-        return rssFeed;
+    public RssFeedModel getRssFeedModel() {
+        return rssFeedModel;
     }
 
-    public void setRssFeed(RssFeed rssFeed) {
-        this.rssFeed = rssFeed;
+    public void setRssFeedModel(RssFeedModel rssFeedModel) {
+        this.rssFeedModel = rssFeedModel;
     }
 }

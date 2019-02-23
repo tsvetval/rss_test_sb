@@ -5,7 +5,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
-import ru.rss.aggregator.entity.RssFeed;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -14,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-public class RssFeedType implements UserType {
+public class RssFeedModelType implements UserType {
 
     @Override
     public int[] sqlTypes() {
@@ -22,8 +21,8 @@ public class RssFeedType implements UserType {
     }
 
     @Override
-    public Class<RssFeed> returnedClass() {
-        return RssFeed.class;
+    public Class<RssFeedModel> returnedClass() {
+        return RssFeedModel.class;
     }
 
     @Override

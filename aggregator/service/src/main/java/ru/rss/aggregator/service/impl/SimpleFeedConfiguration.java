@@ -1,23 +1,18 @@
 package ru.rss.aggregator.service.impl;
 
-import org.springframework.stereotype.Component;
 import ru.rss.aggregator.entity.RssFeedChannel;
 import ru.rss.aggregator.port.RssChannelConfiguration;
 
-import java.util.Collections;
-import java.util.List;
-
-@Component
 public class SimpleFeedConfiguration implements RssChannelConfiguration {
 
+    private final RssFeedChannel rssFeedChannel;
 
-    @Override
-    public void initRssChannels(List<RssFeedChannel> rssFeedChannels) {
-
+    public SimpleFeedConfiguration(String rssUrl) {
+        this.rssFeedChannel = new RssFeedChannel(rssUrl);
     }
 
     @Override
-    public List<RssFeedChannel> getFeedsChannels() {
-        return Collections.singletonList(new RssFeedChannel("https://lenta.ru/rss"));
+    public RssFeedChannel getFeedsChannel() {
+        return rssFeedChannel;
     }
 }

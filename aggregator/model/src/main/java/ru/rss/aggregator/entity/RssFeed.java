@@ -10,7 +10,6 @@ public class RssFeed implements Serializable {
     private String url;
     private List<RssEnclosure> enclosures;
     private ZonedDateTime date;
-    private String feedSource;
 
     public RssFeed() {
     }

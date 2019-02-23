@@ -52,6 +52,7 @@ subprojects {
 		testCompile 'org.testng:testng:6.11'
 		testCompile 'org.assertj:assertj-core:3.6.2'
 	}
+	
     test {
         useTestNG()
     }

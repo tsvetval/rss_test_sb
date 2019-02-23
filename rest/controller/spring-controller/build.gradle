@@ -9,6 +9,7 @@ dependencies {
 	'org.springframework.boot:spring-boot-starter-data-jpa',
 	'org.springframework.boot:spring-boot-starter-jdbc',
 	'org.springframework.boot:spring-boot-autoconfigure',
+    'org.springframework.boot:spring-boot-starter-actuator',
 	'org.springframework:spring-jdbc',
 	'org.springframework:spring-webmvc',
 

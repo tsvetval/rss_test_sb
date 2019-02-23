@@ -1,6 +1,7 @@
 package ru.rss.aggregator.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,8 @@ import ru.rss.aggregator.service.repository.model.RssItem;
 @EntityScan(basePackageClasses = RssItem.class)
 @EnableScheduling
 public class AggregatorConfiguration {
+
+
     @Autowired
     private AggregatorService aggregatorService;
 

@@ -31,7 +31,7 @@ public class AggregatorServiceImpl implements AggregatorService {
     //private SearchService searchService;
     @Override
     public void runGrabTask() {
-        rssChannelConfiguration.getFeedsChannels().forEach(this::readRss);
+        readRss(rssChannelConfiguration.getFeedsChannel());
     }
 
     @Override
@@ -46,7 +46,6 @@ public class AggregatorServiceImpl implements AggregatorService {
             ZonedDateTime maxDateInStorage = rssFeed == null ? ZonedDateTime.now().minus(1L, ChronoUnit.DAYS) : rssFeed.getDate();
             rssFeeds.forEach(o -> {
                 if(maxDateInStorage.isBefore(o.getDate())) {
-                    logger.info(o.getTitle());
                     rssRepository.create(o);
                     //          searchService.addToSearch(null /*TODO*/);
                 }
