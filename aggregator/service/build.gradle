@@ -17,4 +17,5 @@ dependencies {
             project(":aggregator-model"),
             project(":search-model")
     )
+    testCompile 'org.mockito:mockito-core'
 }

@@ -60,7 +60,7 @@ public class AggregatorServiceImpl implements AggregatorService {
             final RssFeed latestRssFeed = rssRepository.getLatestFeedItem();
             final ZonedDateTime maxDateInStorage = Objects.nonNull(latestRssFeed) ? latestRssFeed.getDate() : null;
             log.info("Grabbed {} feeds", rssFeeds.size());
-            AtomicInteger updatedCount = new AtomicInteger();
+            final AtomicInteger updatedCount = new AtomicInteger();
             rssFeeds.forEach(o -> {
                 if (Objects.isNull(o.getDate()) || Objects.isNull(maxDateInStorage) || o.getDate().isAfter(maxDateInStorage)) {
                     rssRepository.create(o);
