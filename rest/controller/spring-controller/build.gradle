@@ -19,3 +19,5 @@ dependencies {
 //	project(":search-service")
 	)
 }
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
