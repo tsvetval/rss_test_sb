@@ -23,7 +23,6 @@ public class ElasticSearchConfig {
 
     private static final Logger log = LoggerFactory.getLogger(ElasticSearchConfig.class);
     public static final String RSS_FEED_DAO = "rssFeedDao";
-    public static final String ELASTIC_OBJECT_MAPPER = "elasticObjectMapper";
 
     @Value("${es.hosts}")
     private String[] hosts;
@@ -66,17 +65,5 @@ public class ElasticSearchConfig {
         ElasticSearchDao animalElasticDao = new ElasticSearchDao("rss_feed", refreshPolicy, client);
         animalElasticDao.initIndexFromFile("ru/rss/config/elasticsearch/rss-feed-index-config.json");
         return animalElasticDao;
-    }
-
-    @Bean
-    @Qualifier(ELASTIC_OBJECT_MAPPER)
-    public ObjectMapper objectMapper() {
-        return   new ObjectMapper()
-                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-                .disable(SerializationFeature.WRITE_DATES_WITH_ZONE_ID)
-                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .disable(MapperFeature.IGNORE_DUPLICATE_MODULE_REGISTRATIONS)
-                .enable(JsonParser.Feature.ALLOW_COMMENTS)
-                .setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 }
