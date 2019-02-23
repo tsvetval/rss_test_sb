@@ -22,7 +22,7 @@ public class RomeRssReaderImpl implements RssReader {
 
     @Override
     public List<RssFeed> readRss(RssFeedChannel channel) throws IOException, FeedException {
-        URL feedUrl = new URL("http://static.feed.rbc.ru/rbc/logical/footer/news.rss");
+        URL feedUrl = new URL(channel.getUrl());
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed feed = input.build(new XmlReader(feedUrl));
         return feed.getEntries().stream().map(this::toRssFeed).collect(Collectors.toList());
