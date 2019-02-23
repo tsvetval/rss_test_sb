@@ -33,6 +33,6 @@ public class RomeRssReaderImpl implements RssReader {
                 syndEntry.getDescription() == null ? "" : syndEntry.getDescription().getValue(),
                 syndEntry.getUri(),
                 syndEntry.getEnclosures().stream().map(enc -> new RssEnclosure(enc.getType(), enc.getUrl())).collect(Collectors.toList()),
-                ZonedDateTime.ofInstant(syndEntry.getPublishedDate().toInstant(), ZoneId.systemDefault()));
+                ZonedDateTime.ofInstant(syndEntry.getPublishedDate().toInstant(), ZoneId.of("UTC")));
     }
 }

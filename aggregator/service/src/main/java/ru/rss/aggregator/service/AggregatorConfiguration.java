@@ -1,7 +1,6 @@
 package ru.rss.aggregator.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +17,12 @@ import ru.rss.aggregator.service.repository.model.RssItem;
 @EnableScheduling
 public class AggregatorConfiguration {
 
+    private final AggregatorService aggregatorService;
 
     @Autowired
-    private AggregatorService aggregatorService;
+    public AggregatorConfiguration(AggregatorService aggregatorService) {
+        this.aggregatorService = aggregatorService;
+    }
 
     @Scheduled(fixedDelayString = "${rss.aggregator.job.delay:30000}")
     public void reedFeeds() {

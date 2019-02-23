@@ -23,14 +23,6 @@ public class RssMapper {
         return rssFeed;
     }
 
-    RssEnclosure toRssEnclosure(RssEnclosureModel rssEnclosureModel){
-        return new RssEnclosure(rssEnclosureModel.getContentType(), rssEnclosureModel.getUrl());
-    }
-
-    RssEnclosureModel toRssEnclosureModel(RssEnclosure rssEnclosure){
-        return new RssEnclosureModel(rssEnclosure.getContentType(), rssEnclosure.getUrl());
-    }
-
     public RssFeedModel toRssFeedModel(RssFeed rssFeed){
         RssFeedModel rssFeedModel = new RssFeedModel();
         rssFeedModel.setPublishedDate(rssFeed.getDate());
@@ -42,5 +34,12 @@ public class RssMapper {
         return rssFeedModel;
     }
 
+    private RssEnclosure toRssEnclosure(RssEnclosureModel rssEnclosureModel){
+        return new RssEnclosure(rssEnclosureModel.getContentType(), rssEnclosureModel.getUrl());
+    }
+
+    private RssEnclosureModel toRssEnclosureModel(RssEnclosure rssEnclosure){
+        return new RssEnclosureModel(rssEnclosure.getContentType(), rssEnclosure.getUrl());
+    }
 
 }

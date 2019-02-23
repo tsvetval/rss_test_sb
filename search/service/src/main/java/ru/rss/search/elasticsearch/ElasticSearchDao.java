@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ElasticSearchDao extends ElasticSearchBaseDao {
+public class ElasticSearchDao extends ElasticIndexBase {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final RefreshPolicy daoRefreshPolicy;

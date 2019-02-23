@@ -1,7 +1,5 @@
 package ru.rss.aggregator.service.repository.model;
 
-import ru.rss.aggregator.entity.RssEnclosure;
-
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.List;

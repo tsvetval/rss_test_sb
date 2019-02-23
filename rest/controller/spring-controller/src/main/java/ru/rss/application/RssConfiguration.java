@@ -12,7 +12,7 @@ public class RssConfiguration {
     private String rssUrl;
 
     @Bean
-    public RssChannelConfiguration rssChannelConfiguration(){
+    public RssChannelConfiguration rssChannelConfiguration() {
         return new SimpleFeedConfiguration(rssUrl);
     }
 

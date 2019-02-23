@@ -9,7 +9,7 @@ import ru.rss.aggregator.service.AggregatorConfiguration;
 import ru.rss.search.SearchServiceConfiguration;
 
 @SpringBootApplication
-@Import({AggregatorConfiguration.class,SearchServiceConfiguration.class})
+@Import({AggregatorConfiguration.class, SearchServiceConfiguration.class})
 @EnableAutoConfiguration
 @ComponentScan
 public class RssApplication {

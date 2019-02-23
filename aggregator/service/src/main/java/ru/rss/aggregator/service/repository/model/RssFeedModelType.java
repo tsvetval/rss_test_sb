@@ -62,7 +62,7 @@ public class RssFeedModelType implements UserType {
     @Override
     public Object deepCopy(final Object value) throws HibernateException {
         try {
-            // use serialization to create a deep copy
+            //TODO use serialization to create a deep copy
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(bos);
             oos.writeObject(value);

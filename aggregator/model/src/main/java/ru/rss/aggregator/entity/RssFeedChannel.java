@@ -1,6 +1,8 @@
 package ru.rss.aggregator.entity;
 
-public class RssFeedChannel {
+import java.io.Serializable;
+
+public class RssFeedChannel implements Serializable {
     private String url;
 
     public RssFeedChannel(String url) {

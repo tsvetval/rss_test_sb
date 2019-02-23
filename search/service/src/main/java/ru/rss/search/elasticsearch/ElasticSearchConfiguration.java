@@ -1,27 +1,20 @@
 package ru.rss.search.elasticsearch;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-public class ElasticSearchConfig {
+public class ElasticSearchConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(ElasticSearchConfig.class);
+    private static final Logger log = LoggerFactory.getLogger(ElasticSearchConfiguration.class);
     public static final String RSS_FEED_DAO = "rssFeedDao";
 
     @Value("${es.hosts}")
@@ -58,12 +51,12 @@ public class ElasticSearchConfig {
 
 
     @Bean(RSS_FEED_DAO)
-    public ElasticSearchDao getAggregatedAnimalElasticSearchDao(
+    public ElasticSearchDao getRssFeedElasticSearchDao(
             @Value("${es.refresh.policy.immediate.refresh:true}") String refreshPolicy,
             RestHighLevelClient client) {
 
-        ElasticSearchDao animalElasticDao = new ElasticSearchDao("rss_feed", refreshPolicy, client);
-        animalElasticDao.initIndexFromFile("ru/rss/config/elasticsearch/rss-feed-index-config.json");
-        return animalElasticDao;
+        ElasticSearchDao elasticSearchDao = new ElasticSearchDao("rss_feed", refreshPolicy, client);
+        elasticSearchDao.initIndexFromFile("ru/rss/config/elasticsearch/rss-feed-index-config.json");
+        return elasticSearchDao;
     }
 }

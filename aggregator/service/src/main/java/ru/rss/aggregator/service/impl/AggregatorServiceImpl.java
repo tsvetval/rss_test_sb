@@ -15,28 +15,38 @@ import ru.rss.aggregator.service.storage.RssRepository;
 import ru.rss.search.port.SearchService;
 
 import java.io.IOException;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 public class AggregatorServiceImpl implements AggregatorService {
-    private final Logger logger = LoggerFactory.getLogger(AggregatorServiceImpl.class);
+
+    private final Logger log = LoggerFactory.getLogger(AggregatorServiceImpl.class);
+
+    private final RssReader rssReader;
+    private final RssRepository rssRepository;
+    private final RssChannelConfiguration rssChannelConfiguration;
+    private final SearchService searchService;
+    private final RssFeedMapper rssFeedMapper;
+
     @Autowired
-    private RssReader rssReader;
-    @Autowired
-    private RssRepository rssRepository;
-    @Autowired
-    private RssChannelConfiguration rssChannelConfiguration;
-    @Autowired
-    private SearchService searchService;
-    @Autowired
-    private RssFeedMapper rssFeedMapper;
+    public AggregatorServiceImpl(RssReader rssReader, RssRepository rssRepository, RssChannelConfiguration rssChannelConfiguration, SearchService searchService, RssFeedMapper rssFeedMapper) {
+        this.rssReader = rssReader;
+        this.rssRepository = rssRepository;
+        this.rssChannelConfiguration = rssChannelConfiguration;
+        this.searchService = searchService;
+        this.rssFeedMapper = rssFeedMapper;
+    }
 
     @Override
     public void runGrabTask() {
+        log.info("Rss read job started, grab rss channel {}", rssChannelConfiguration.getFeedsChannel().getUrl());
         readRss(rssChannelConfiguration.getFeedsChannel());
+        log.info("Rss read job finished");
     }
 
     @Override
@@ -46,18 +56,22 @@ public class AggregatorServiceImpl implements AggregatorService {
 
     private void readRss(RssFeedChannel rssFeedChannel) {
         try {
-            List<RssFeed> rssFeeds = rssReader.readRss(rssFeedChannel);
-            RssFeed rssFeed = rssRepository.getLastFeedItem();
-            ZonedDateTime maxDateInStorage = rssFeed == null ? ZonedDateTime.now().minus(1L, ChronoUnit.DAYS) : rssFeed.getDate();
+            final List<RssFeed> rssFeeds = rssReader.readRss(rssFeedChannel);
+            final RssFeed latestRssFeed = rssRepository.getLatestFeedItem();
+            final ZonedDateTime maxDateInStorage = Objects.nonNull(latestRssFeed) ? latestRssFeed.getDate() : null;
+            log.info("Grabbed {} feeds", rssFeeds.size());
+            AtomicInteger updatedCount = new AtomicInteger();
             rssFeeds.forEach(o -> {
-                if(maxDateInStorage.isBefore(o.getDate())) {
+                if (Objects.isNull(o.getDate()) || Objects.isNull(maxDateInStorage) || o.getDate().isAfter(maxDateInStorage)) {
                     rssRepository.create(o);
-                    logger.info("Created new RssFeed {}", o.getId());
+                    log.trace("Created new RssFeed with id {}", o.getId());
                     searchService.addToSearch(rssFeedMapper.toSearchRssFeed(o));
+                    updatedCount.getAndIncrement();
                 }
             });
+            log.info("Created {} feeds", updatedCount);
         } catch (IOException | FeedException e) {
-            logger.error("Error on read rss ", e);
+            log.error("Error while reading rss ", e);
         }
     }
 

@@ -14,7 +14,7 @@ import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
 import static org.elasticsearch.index.query.QueryBuilders.multiMatchQuery;
-import static ru.rss.search.elasticsearch.ElasticSearchConfig.RSS_FEED_DAO;
+import static ru.rss.search.elasticsearch.ElasticSearchConfiguration.RSS_FEED_DAO;
 
 @Component
 public class RssFeedIndexRepositoryImpl implements RssFeedIndexRepository {

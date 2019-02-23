@@ -9,7 +9,6 @@ import ru.rss.aggregator.service.repository.model.RssItem;
 import ru.rss.aggregator.service.storage.RssRepository;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Spliterators;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -17,10 +16,15 @@ import java.util.stream.StreamSupport;
 @Component
 @Transactional
 public class RssRepositoryImpl implements RssRepository {
+
+    private final RssItemRepository rssItemRepository;
+    private final RssMapper rssMapper;
+
     @Autowired
-    private RssItemRepository rssItemRepository;
-    @Autowired
-    private RssMapper rssMapper;
+    public RssRepositoryImpl(RssItemRepository rssItemRepository, RssMapper rssMapper) {
+        this.rssItemRepository = rssItemRepository;
+        this.rssMapper = rssMapper;
+    }
 
     @Override
     public RssFeed create(RssFeed rssFeed) {
@@ -32,8 +36,8 @@ public class RssRepositoryImpl implements RssRepository {
     }
 
     @Override
-    public RssFeed getLastFeedItem() {
-        RssItem rssItem = rssItemRepository.getLastFeedItem();
+    public RssFeed getLatestFeedItem() {
+        RssItem rssItem = rssItemRepository.getLatestFeedItem();
         return rssItem == null ? null : rssMapper.toRssFeed(rssItem.getRssFeedModel());
     }
 

@@ -1,10 +1,8 @@
 package ru.rss.aggregator.service.repository.model;
 
 import org.hibernate.annotations.Type;
-import ru.rss.aggregator.entity.RssFeed;
 
 import javax.persistence.*;
-import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "rss_item")

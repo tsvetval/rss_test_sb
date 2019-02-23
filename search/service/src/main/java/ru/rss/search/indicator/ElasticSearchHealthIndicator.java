@@ -7,26 +7,29 @@ import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.actuate.health.Status;
 import org.springframework.stereotype.Component;
-import ru.rss.search.port.SearchService;
 
 import static org.springframework.boot.actuate.health.Health.status;
 
 @Component
 public class ElasticSearchHealthIndicator implements HealthIndicator {
 
+    private final RestHighLevelClient restHighLevelClient;
+
     @Autowired
-    RestHighLevelClient restHighLevelClient;
+    public ElasticSearchHealthIndicator(RestHighLevelClient restHighLevelClient) {
+        this.restHighLevelClient = restHighLevelClient;
+    }
 
     @Override
     public Health health() {
         Health.Builder healthBuilder = null;
-        try{
+        try {
             if (restHighLevelClient.ping(RequestOptions.DEFAULT)) {
                 healthBuilder = status(Status.UP);
             } else {
                 healthBuilder = status(Status.DOWN);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             healthBuilder = status(Status.DOWN).withException(e);
         }
         return healthBuilder.build();
