@@ -5,6 +5,8 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 public class RssFeed implements Serializable {
+
+    private Long id;
     private String title;
     private String description;
     private String url;
@@ -20,6 +22,14 @@ public class RssFeed implements Serializable {
         this.url = url;
         this.enclosures = enclosures;
         this.date = date;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {

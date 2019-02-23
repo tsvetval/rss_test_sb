@@ -28,10 +28,10 @@ public class ElasticSearchConfig {
     @Value("${es.hosts}")
     private String[] hosts;
 
-    @Value("${es.port:443}")
+    @Value("${es.port:9200}")
     private int port;
 
-    @Value("${es.scheme:https}")
+    @Value("${es.scheme:http}")
     private String scheme;
 
     @Bean
@@ -60,12 +60,10 @@ public class ElasticSearchConfig {
 
     @Bean(RSS_FEED_DAO)
     public ElasticSearchDao getAggregatedAnimalElasticSearchDao(
-            @Value("${es.aggregated-animal.index.name}") String indexName,
             @Value("${es.refresh.policy.immediate.refresh:true}") String refreshPolicy,
-            @Value("${es.scroll.keeep-alive:60000}") int keepAliveInMs,
             RestHighLevelClient client) {
 
-        ElasticSearchDao animalElasticDao = new ElasticSearchDao(indexName, refreshPolicy, keepAliveInMs, client);
+        ElasticSearchDao animalElasticDao = new ElasticSearchDao("rss_feed", refreshPolicy, client);
         animalElasticDao.initIndexFromFile("ru/rss/config/elasticsearch/rss-feed-index-config.json");
         return animalElasticDao;
     }

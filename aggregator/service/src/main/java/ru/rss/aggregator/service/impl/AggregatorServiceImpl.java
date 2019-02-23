@@ -9,8 +9,10 @@ import ru.rss.aggregator.entity.RssFeed;
 import ru.rss.aggregator.entity.RssFeedChannel;
 import ru.rss.aggregator.port.AggregatorService;
 import ru.rss.aggregator.port.RssChannelConfiguration;
+import ru.rss.aggregator.service.mapper.RssFeedMapper;
 import ru.rss.aggregator.service.rss.RssReader;
 import ru.rss.aggregator.service.storage.RssRepository;
+import ru.rss.search.port.SearchService;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
@@ -27,9 +29,11 @@ public class AggregatorServiceImpl implements AggregatorService {
     private RssRepository rssRepository;
     @Autowired
     private RssChannelConfiguration rssChannelConfiguration;
+    @Autowired
+    private SearchService searchService;
+    @Autowired
+    private RssFeedMapper rssFeedMapper;
 
-    //@Autowired
-    //private SearchService searchService;
     @Override
     public void runGrabTask() {
         readRss(rssChannelConfiguration.getFeedsChannel());
@@ -48,7 +52,8 @@ public class AggregatorServiceImpl implements AggregatorService {
             rssFeeds.forEach(o -> {
                 if(maxDateInStorage.isBefore(o.getDate())) {
                     rssRepository.create(o);
-                    //          searchService.addToSearch(null /*TODO*/);
+                    logger.info("Created new RssFeed {}", o.getId());
+                    searchService.addToSearch(rssFeedMapper.toSearchRssFeed(o));
                 }
             });
         } catch (IOException | FeedException e) {

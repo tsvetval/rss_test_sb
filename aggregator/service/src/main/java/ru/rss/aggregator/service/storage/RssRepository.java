@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface RssRepository {
-    void create(RssFeed rssFeed);
+    RssFeed create(RssFeed rssFeed);
 
     RssFeed getLastFeedItem();
 

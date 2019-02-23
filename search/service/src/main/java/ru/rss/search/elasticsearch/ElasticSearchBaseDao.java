@@ -1,8 +1,9 @@
 package ru.rss.search.elasticsearch;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 import org.apache.commons.io.IOUtils;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -36,9 +37,16 @@ public abstract class ElasticSearchBaseDao {
     final String indexName;
 
 
-    public ElasticSearchBaseDao(RestHighLevelClient client, ObjectMapper elasticObjectMapper, String indexName) {
+    public ElasticSearchBaseDao(RestHighLevelClient client, String indexName) {
         this.client = client;
-        this.elasticObjectMapper = elasticObjectMapper;
+        this.elasticObjectMapper = new ObjectMapper()
+                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .disable(SerializationFeature.WRITE_DATES_WITH_ZONE_ID)
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .disable(MapperFeature.IGNORE_DUPLICATE_MODULE_REGISTRATIONS)
+                .enable(JsonParser.Feature.ALLOW_COMMENTS)
+                .setSerializationInclusion(JsonInclude.Include.ALWAYS)
+                .configure(SerializationFeature.WRITE_DATES_WITH_ZONE_ID, false);
         this.indexName = indexName;
     }
 

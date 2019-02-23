@@ -14,7 +14,7 @@
           "ngram": {
             "type": "ngram",
             "min_gram": 1,
-            "max_gram": 50,
+            "max_gram": 10,
             "token_chars": [
               "letter",
               "digit",
@@ -37,13 +37,16 @@
   "mappings": {
     "rssFeed": {
       "properties": {
-        "feedId": {
-          "type": "text",
-          "copy_to": "animalOrder.searchText"
+        "id" : {
+          "type": "long"
         },
-        "feed_text": {
+        "title": {
           "type": "text",
-          "copy_to": "animalOrder.searchText"
+          "copy_to": "searchText"
+        },
+        "description": {
+          "type": "text",
+          "copy_to": "searchText"
         },
         "searchText": {
           "type": "text"

@@ -23,10 +23,12 @@ public class RssRepositoryImpl implements RssRepository {
     private RssMapper rssMapper;
 
     @Override
-    public void create(RssFeed rssFeed) {
+    public RssFeed create(RssFeed rssFeed) {
         RssItem rssItem = new RssItem();
         rssItem.setRssFeedModel(rssMapper.toRssFeedModel(rssFeed));
         rssItemRepository.save(rssItem);
+        rssFeed.setId(rssItem.getId());
+        return rssFeed;
     }
 
     @Override

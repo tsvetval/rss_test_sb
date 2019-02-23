@@ -1,13 +1,19 @@
 package ru.rss.search.repository;
 
 import org.apache.commons.lang3.NotImplementedException;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import ru.rss.search.elasticsearch.ElasticIndexRequest;
 import ru.rss.search.elasticsearch.ElasticSearchDao;
-import ru.rss.search.entity.SearchRssFeedInternal;
+import ru.rss.search.repository.model.SearchRssFeedModel;
 
+import java.util.List;
 import java.util.Optional;
 
+import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
+import static org.elasticsearch.index.query.QueryBuilders.multiMatchQuery;
 import static ru.rss.search.elasticsearch.ElasticSearchConfig.RSS_FEED_DAO;
 
 @Component
@@ -20,7 +26,7 @@ public class RssFeedIndexRepositoryImpl implements RssFeedIndexRepository {
     }
 
     @Override
-    public Optional<SearchRssFeedInternal> findOne(String entityId) {
+    public Optional<SearchRssFeedModel> findOne(String entityId) {
         throw new NotImplementedException("method not implemented yet");
     }
 
@@ -30,13 +36,15 @@ public class RssFeedIndexRepositoryImpl implements RssFeedIndexRepository {
     }
 
     @Override
-    public SearchRssFeedInternal fullTextSearch(String term) {
-        return null;
+    public List<SearchRssFeedModel> fullTextSearch(String term) {
+        BoolQueryBuilder queryBuilder = boolQuery();
+        queryBuilder.must(multiMatchQuery(term).field("searchText").type(MultiMatchQueryBuilder.Type.PHRASE_PREFIX));
+        return elasticSearchDao.search(ENTITY_TYPE, queryBuilder, SearchRssFeedModel.class);
     }
 
     @Override
-    public SearchRssFeedInternal save(SearchRssFeedInternal entity) {
-        elasticSearchDao.index();
+    public SearchRssFeedModel save(SearchRssFeedModel entity) {
+        elasticSearchDao.index(new ElasticIndexRequest(String.valueOf(entity.getId()), ENTITY_TYPE, entity));
         return entity;
     }
 

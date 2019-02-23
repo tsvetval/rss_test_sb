@@ -1,7 +1,7 @@
 package ru.rss.search.port;
 
-import ru.rss.search.entity.SearchResult;
-import ru.rss.search.entity.SearchRssFeed;
+import ru.rss.search.repository.model.SearchResult;
+import ru.rss.search.repository.model.SearchRssFeed;
 
 public interface SearchService {
 

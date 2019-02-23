@@ -6,9 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import ru.rss.aggregator.service.AggregatorConfiguration;
+import ru.rss.search.SearchServiceConfiguration;
 
 @SpringBootApplication
-@Import(AggregatorConfiguration.class)
+@Import({AggregatorConfiguration.class,SearchServiceConfiguration.class})
 @EnableAutoConfiguration
 @ComponentScan
 public class RssApplication {

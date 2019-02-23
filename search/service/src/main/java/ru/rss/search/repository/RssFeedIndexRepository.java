@@ -1,12 +1,14 @@
 package ru.rss.search.repository;
 
 import ru.rss.search.elasticsearch.IndexRepository;
-import ru.rss.search.entity.SearchRssFeedInternal;
+import ru.rss.search.repository.model.SearchRssFeedModel;
 
-public interface RssFeedIndexRepository extends IndexRepository<SearchRssFeedInternal> {
+import java.util.List;
 
-    public SearchRssFeedInternal fullTextSearch(String term);
+public interface RssFeedIndexRepository extends IndexRepository<SearchRssFeedModel> {
+
+    List<SearchRssFeedModel> fullTextSearch(String term);
 
     @Override
-    SearchRssFeedInternal save(SearchRssFeedInternal entity);
+    SearchRssFeedModel save(SearchRssFeedModel entity);
 }

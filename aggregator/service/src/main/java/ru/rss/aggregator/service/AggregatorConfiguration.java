@@ -22,7 +22,7 @@ public class AggregatorConfiguration {
     @Autowired
     private AggregatorService aggregatorService;
 
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelayString = "${rss.aggregator.job.delay:30000}")
     public void reedFeeds() {
         aggregatorService.runGrabTask();
     }
