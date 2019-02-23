@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.rss.aggregator.entity.RssFeed;
 import ru.rss.aggregator.port.AggregatorService;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -16,7 +18,7 @@ public class RssController {
     private AggregatorService aggregatorService;
 
     @GetMapping("/list")
-    public List<RssFeed> getRssList(){
-        return aggregatorService.readAll();
+    public Collection<RssFeed> getRssList(){
+        return aggregatorService.findByIds(Collections.singleton(1L));
     }
 }

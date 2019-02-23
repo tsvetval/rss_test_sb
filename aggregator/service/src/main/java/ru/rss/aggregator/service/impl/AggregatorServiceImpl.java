@@ -15,6 +15,7 @@ import ru.rss.aggregator.service.storage.RssRepository;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -35,8 +36,8 @@ public class AggregatorServiceImpl implements AggregatorService {
     }
 
     @Override
-    public List<RssFeed> readAll() {
-        return rssRepository.findAll();
+    public Collection<RssFeed> findByIds(Collection<Long> ids) {
+        return rssRepository.findByIds(ids);
     }
 
     private void readRss(RssFeedChannel rssFeedChannel) {

@@ -8,11 +8,10 @@ import ru.rss.aggregator.service.repository.mapper.RssMapper;
 import ru.rss.aggregator.service.repository.model.RssItem;
 import ru.rss.aggregator.service.storage.RssRepository;
 
-import java.time.ZonedDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Spliterators;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Component
@@ -31,16 +30,16 @@ public class RssRepositoryImpl implements RssRepository {
     }
 
     @Override
-    public List<RssFeed> findAll() {
-        return StreamSupport.stream(Spliterators
-                .spliteratorUnknownSize(rssItemRepository.findAll().iterator(), 0),false)
-                .map(rss->rssMapper.toRssFeed(rss.getRssFeedModel()))
-                .collect(Collectors.toList());
+    public RssFeed getLastFeedItem() {
+        RssItem rssItem = rssItemRepository.getLastFeedItem();
+        return rssItem == null ? null : rssMapper.toRssFeed(rssItem.getRssFeedModel());
     }
 
     @Override
-    public RssFeed getLastFeedItem() {
-        RssItem rssItem = rssItemRepository.getLastFeedItem();
-        return rssItem == null? null : rssMapper.toRssFeed(rssItem.getRssFeedModel());
+    public Collection<RssFeed> findByIds(Collection<Long> ids) {
+        return StreamSupport.stream(Spliterators
+                .spliteratorUnknownSize(rssItemRepository.findAllById(ids).iterator(), 0), false)
+                .map(rss -> rssMapper.toRssFeed(rss.getRssFeedModel()))
+                .collect(Collectors.toList());
     }
 }

@@ -18,7 +18,7 @@ public class RssMapper {
         rssFeed.setDate(rssFeedModel.getPublishedDate());
         rssFeed.setDescription(rssFeedModel.getDescription());
         rssFeed.setEnclosures(rssFeedModel.getEnclosures().stream().map(this::toRssEnclosure).collect(Collectors.toList()));
-        rssFeed.setTitle(rssFeed.getTitle());
+        rssFeed.setTitle(rssFeedModel.getTitle());
         rssFeed.setUrl(rssFeedModel.getUrl());
         return rssFeed;
     }
