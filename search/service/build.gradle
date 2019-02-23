@@ -5,6 +5,14 @@ ext.moduleName = 'rss.example.aggregator.service'
 dependencies {
     implementation(
             project(':search-model'),
-            'org.apache.commons:commons-lang3:3.7'
+            'org.apache.commons:commons-lang3:3.7',
+            'org.elasticsearch:elasticsearch',
+            'org.elasticsearch.client:transport',
+            'org.elasticsearch.client:elasticsearch-rest-high-level-client',
+            'org.springframework:spring-context',
+            'org.slf4j:slf4j-api',
+            'com.fasterxml.jackson.datatype:jackson-datatype-jsr310',
+            'org.springframework.boot:spring-boot-starter-data-jpa',
+            'commons-io:commons-io'
     )
 }

@@ -3,19 +3,18 @@ apply plugin: 'java-library'
 ext.moduleName = 'rss.example.aggregator.service'
 
 dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jpa'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc'
-    compile group: 'org.springframework', name: 'spring-jdbc'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-json'
-
-    compile 'org.springframework.boot:spring-boot-starter-jdbc'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compile 'org.springframework:spring-context'
-
-    compile 'org.postgresql:postgresql'
-
-    compile project(":aggregator-model")
-    compile project(":search-model")
-    compile 'com.rometools:rome:1.5.0'
+    implementation(
+            'org.apache.commons:commons-lang3:3.7',
+            'org.springframework.boot:spring-boot-starter-data-jpa',
+            'org.springframework.boot:spring-boot-starter-jdbc',
+            'org.springframework:spring-jdbc',
+            'org.springframework.boot:spring-boot-starter-json',
+            'org.springframework.boot:spring-boot-starter-jdbc',
+            'org.springframework.boot:spring-boot-starter-data-jpa',
+            'org.springframework:spring-context',
+            'org.postgresql:postgresql',
+            project(":aggregator-model"),
+            project(":search-model"),
+            'com.rometools:rome:1.5.0'
+    )
 }

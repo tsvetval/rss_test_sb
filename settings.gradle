@@ -4,7 +4,7 @@ include ':aggregator-model'
 include ':aggregator-service'
 
 include ':search-model'
-include ':search-service'
+//include ':search-service'
 
 include ':spring-controller'
 
@@ -12,6 +12,6 @@ project(":aggregator-model").projectDir = file("aggregator/model")
 project(":aggregator-service").projectDir = file("aggregator/service")
 
 project(":search-model").projectDir = file("search/model")
-project(":search-service").projectDir = file("search/service")
+//project(":search-service").projectDir = file("search/service")
 
 project(":spring-controller").projectDir = file("rest/controller/spring-controller")

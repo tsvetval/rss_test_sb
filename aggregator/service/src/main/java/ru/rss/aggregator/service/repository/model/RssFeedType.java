@@ -37,7 +37,7 @@ public class RssFeedType implements UserType {
             mapper.registerModule(new JavaTimeModule());
             return mapper.readValue(cellContent.getBytes(StandardCharsets.UTF_8), returnedClass());
         } catch (final Exception ex) {
-            throw new RuntimeException("Failed to convert String to Invoice: " + ex.getMessage(), ex);
+            throw new RuntimeException("Failed to convert String to Invoice", ex);
         }
     }
 
@@ -55,7 +55,7 @@ public class RssFeedType implements UserType {
             w.flush();
             st.setObject(index, w.toString(), Types.OTHER);
         } catch (final Exception ex) {
-            throw new RuntimeException("Failed to convert Invoice to String: " + ex.getMessage(), ex);
+            throw new RuntimeException("Failed to convert Invoice to String" , ex);
         }
 
     }

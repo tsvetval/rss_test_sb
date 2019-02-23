@@ -48,7 +48,7 @@ public class AggregatorServiceImpl implements AggregatorService {
                 if(maxDateInStorage.isBefore(o.getDate())) {
                     logger.info(o.getTitle());
                     rssRepository.create(o);
-                    //          searchService.indexRss(null /*TODO*/);
+                    //          searchService.addToSearch(null /*TODO*/);
                 }
             });
         } catch (IOException | FeedException e) {

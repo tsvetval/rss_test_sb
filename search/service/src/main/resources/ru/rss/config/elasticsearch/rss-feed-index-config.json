@@ -1,0 +1,57 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": "6",
+      "number_of_replicas": "2",
+      "analysis": {
+        "analyzer": {
+          "ngram": {
+            "tokenizer": "ngram",
+            "filter": "lowercase"
+          }
+        },
+        "tokenizer": {
+          "ngram": {
+            "type": "ngram",
+            "min_gram": 1,
+            "max_gram": 50,
+            "token_chars": [
+              "letter",
+              "digit",
+              "punctuation",
+              "symbol"
+            ]
+          }
+        },
+        "normalizer": {
+          "lowercase_normalizer": {
+            "type": "custom",
+            "filter": [
+              "lowercase"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+    "rssFeed": {
+      "properties": {
+        "feedId": {
+          "type": "text",
+          "copy_to": "animalOrder.searchText"
+        },
+        "feed_text": {
+          "type": "text",
+          "copy_to": "animalOrder.searchText"
+        },
+        "searchText": {
+          "type": "text"
+        }
+      },
+      "_meta": {
+        "version": "1"
+      }
+    }
+  }
+}

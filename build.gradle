@@ -16,10 +16,11 @@ buildscript {
 	}
 }
 subprojects {
+	apply plugin: 'maven'
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
-	apply plugin: 'org.springframework.boot'
+	//apply plugin: 'org.springframework.boot'
 	apply plugin: "io.spring.dependency-management"
 
 	group = 'ru.rss.example'
@@ -42,6 +43,8 @@ subprojects {
 			dependency "org.elasticsearch:elasticsearch:${elasticsearchVersion}"
 			dependency "org.elasticsearch.client:transport:${elasticsearchVersion}"
 			dependency "org.elasticsearch.client:elasticsearch-rest-high-level-client:${elasticsearchVersion}"
+
+			dependency 'commons-io:commons-io:2.5'
 		}
 	}
     
